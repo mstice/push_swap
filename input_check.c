@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include "libft/libft.h"
 
 void input_check(int argc, char **argv)
 {
@@ -15,7 +14,7 @@ void input_check(int argc, char **argv)
 			i++;
 		while (argv[j][i] != '\0') //checks for non-numbers
 		{
-			if (argv[j][i] < '0' || argv[j][i] > '9')
+			if (ft_isdigit(argv[j][i]) == 0)
 				write(2, "Error\n", 6), exit(1);
 			i++;
 		}
@@ -30,9 +29,7 @@ void input_check(int argc, char **argv)
 		{
 			i = 0;
 			while (argv[j][i] == '0')
-			{
 				argv[j]++, i++;
-			}
 			i = 0;
 			while (argv[k][i] == '0')
 				argv[k]++, i++;

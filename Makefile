@@ -20,11 +20,18 @@ RM := rm -f
 $(NAME): $(LIBFT) $(OBJECTS)
 	$(AR) $(ARFLAGS) $(NAME) $(LIBFT) $(OBJECTS)
 
+# $(LIBFT):
+# 	@$(MAKE) -C libft
+# 	@cp $(LIBFT) libft.a
+# 	@ar rcs libft.a $(OBJ)
+# 	$(RM) libft.a
+
 $(LIBFT):
 	@$(MAKE) -C libft
 	@cp $(LIBFT) libft.a
-	@ar rcs libft.a $(OBJ)
-	$(RM) libft.a
+	$(AR) $(ARFLAGS) libft.a $(OBJ)
+	@mv libft.a $(NAME)
+
 
 # Run 'make' to build everything
 all: $(LIBFT) $(NAME)
