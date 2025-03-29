@@ -1,5 +1,5 @@
 #include "push_swap.h"
-//#include "libft/libft.h"
+#include "libft/libft.h"
 
 void input_check(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ void input_check(int argc, char **argv)
 			i = 0;
 			while (argv[k][i] == '0')
 				argv[k]++, i++;
-			if (strncmp(argv[j], argv[k], argc - 1) != 0) //use ft version here
+			if (ft_strncmp(argv[j], argv[k], argc - 1) != 0) //use ft version here
 				k++;
 			else
 				write(2, "Error\n", 6), exit(1);

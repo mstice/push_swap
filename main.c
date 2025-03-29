@@ -1,5 +1,4 @@
 #include "push_swap.h"
-//#include "libft/libft.h"
 
 //CHECKLIST
 //change all functions to ones of Libft
