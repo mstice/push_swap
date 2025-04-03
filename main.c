@@ -1,43 +1,41 @@
 #include "push_swap.h"
 
 //CHECKLIST
-//change all functions to ones of Libft
-//figure out how to include Libft using makefile
+//make sure to check sorted function thoroughly
+//make sure to check for double numbers
+
+void 	ft_error(void)
+{
+	write(2, "Error\n", 6), exit(1);
+}
+
 
 int	main(int argc, char **argv)
 {
-	int	j;
+	// int	j;
 	
-	if (argc <= 1)
-		write(2, "Error\n", 6), exit(1);
+	if (argc == 1)
+		exit(1);
+	//if (argc == 2)
+		//will still have to process this
 	input_check(argc, argv);
-	// input_atoi(argv);
-	// while (argv[j] != NULL)
-	// {
-	// 	if((argv[j][i] == '+' || argv[j][i] == '-') && i == 0) //allows for + and -
-	// 		i++;
-	// 	while (argv[j][i] != '\0') //checks for non-numbers
-	// 	{
-	// 		if (argv[j][i] < '0' || argv[j][i] > '9')
-	// 			write(2, "Error\n", 6), exit(1);
-	// 		i++;
-	// 	}
-	// 	i = 0;
-	// 	j++;
-	// }
+	input_stack(argc, argv);
+	// if (argc == 3)
+	// 	bi_sort();
+	// else if (argc == 4)
+	// 	tri_sort();
+	// else if (argc == 5)
+	// 	quad_sort();
+	// else if (argc == 6)
+	// 	quint_sort();
+	// else
+	// 	multi_sort();
 	// j = 1;
+	// printf("ARGV: ");
 	// while (argv[j] != NULL)
-	// {
-	// 	k = j + 1;
-	// 	while (argv[k] != NULL && strcmp(argv[j], argv[k]) != 0)
-	// 		k++;
-	// 	if (argv[k] != NULL && strcmp(argv[j], argv[k]) == 0)
-	// 		write(2, "Error\n", 6), exit(1);
-	// 	else if (argv[k] == NULL)
-	// 		j++;
-	// }
-	j = 1;
-	while (argv[j] != NULL)
-		printf("%s ", argv[j++]);
+	// 	printf("%s ", argv[j++]);
+	printf("\n");
+
+	//free all nodes
 	return(0);
 }
