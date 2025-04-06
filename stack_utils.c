@@ -62,7 +62,8 @@ struct s_stack	*del_first(struct s_stack *tail)
 	}
 	tail -> next = temp -> next;
 	temp -> next -> prev = tail;
-	return (free(temp), tail);
+	free(temp);
+	return (tail);
 }
 
 struct s_stack *del_last(struct s_stack *tail)
@@ -86,18 +87,20 @@ struct s_stack *del_last(struct s_stack *tail)
 	return (tail);
 }
 
-bool	sorted(struct s_stack *tail)
+void	print(struct s_stack *tail)
 {
-	struct s_stack *head;
-
-	head = tail -> next;
-	
-	while ((head != tail) && head -> nbr < head -> next -> nbr)
-		head = head -> next;
-	if (head == tail)
-		return (1);
-	else //if (head != tail && head -> nbr >= head -> next -> nbr)
-		return (0);
+	if (tail == NULL)
+		printf("no element in the list");
+	else
+	{
+		struct s_stack *temp = tail -> next;
+		do
+		{
+			printf("%d ", temp -> nbr);
+			temp = temp -> next;
+		} while (temp != tail -> next);
+	}
+	printf("\nsorted: %d \n", sorted(tail));
 }
 
 // int main(void)

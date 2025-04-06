@@ -19,7 +19,7 @@ typedef struct	s_stack
 
 //checking the input is valid and processing the input
 void	ft_error(void);
-void	input_check(int argc, char **argv); //checks for non-numbers
+char	**input_check(int argc, char **argv); //checks for non-numbers
 void	input_stack(int argc, char **argv); //checks for ints, deletes zeroes and doubles
 
 //stack utils
@@ -28,7 +28,6 @@ struct s_stack	*add_at_beg(struct s_stack *tail, int data); //adds a new node at
 struct s_stack	*add_at_end(struct s_stack *tail, int data); //adds a new node at the end
 struct s_stack	*del_first(struct s_stack *tail); //deletes the first node
 struct s_stack	*del_last(struct s_stack *tail); //deletes the last node
-bool	sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascending order
 
 // //mini sort
 // void	bi_sort(t_stack stack, char **argv);
@@ -40,20 +39,20 @@ bool	sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascendin
 // void	multi_sort(t_stack stack, char **argv);
 
 //sorting functions
-// void	sa(t_stack stack);
-// void	sb(t_stack stack);
-// void	ss(t_stack stack);
+void	sa(struct s_stack *tail, char stack_name); //also sb
+void	ss(struct s_stack *tail_a, struct s_stack *tail_b);
 // void	pa(t_stack stack);
 // void	pb(t_stack stack);
-// void	ra(t_stack stack);
-// void	rb(t_stack stack);
-// void	rr(t_stack stack);
-// void	rra(t_stack stack);
-// void	rrb(t_stack stack);
-// void	rrr(t_stack stack);
+void	ra(struct s_stack *tail, char stack_name); //also rb
+void	rr(struct s_stack *tail_a, struct s_stack *tail_b);
+void	rra(struct s_stack *tail, char stack_name); //also rrb
+void	rrr(struct s_stack *tail_a, struct s_stack *tail_b);
 
 //sorting utils
-// bool	is_sorted(t_stack stack); //TRUE if stack is sorted
+bool	sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascending order
 // int		big(t_stack stack); //finds the position of the biggest number
 // int		smol(t_stack stack); //finds the position of the smallest number
+
+//TO REMOVE
+void	print(struct s_stack *tail);
 #endif

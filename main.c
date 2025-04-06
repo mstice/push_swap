@@ -13,13 +13,14 @@ void 	ft_error(void)
 int	main(int argc, char **argv)
 {
 	// int	j;
+	char **strs;
 	
 	if (argc == 1)
 		exit(1);
 	//if (argc == 2)
 		//will still have to process this
-	input_check(argc, argv);
-	input_stack(argc, argv);
+	strs = input_check(argc, argv);
+	input_stack(argc, strs);
 	// if (argc == 3)
 	// 	bi_sort();
 	// else if (argc == 4)

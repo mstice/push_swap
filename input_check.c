@@ -1,39 +1,28 @@
 #include "push_swap.h"
-static char	**input_string(char **argv)
-{
-	int	j;
 
-	argv = ft_split(argv[1], ' ');
-	j = 0;
-	while (argv[j] != NULL)
-		printf("%s\n", argv[j++]);
-	return (argv);
-}
-
-void input_check(int argc, char **argv)
+char **input_check(int argc, char **argv)
 {
 	int	i;
 	int j;
+	char **strs;
 
-	
-	i = 0;
-	j = 1;
+	j = 0;
 	if (argc == 2) //DO SOMETHING
+		strs = ft_split(argv[1] , ' ');
+	else
+		strs = &argv[1];
+	while (strs[j] != NULL) //checks for non-numbers
 	{
-		argv = input_string(argv);
-		j = 0;
-	}
-	while (argv[j] != NULL) //checks for non-numbers
-	{
- 		if((argv[j][i] == '+' || argv[j][i] == '-') && i == 0) //allows for + and -
+		i = 0;
+ 		if((strs[j][i] == '+' || strs[j][i] == '-') && i == 0) //allows for + and -
  			i++;
- 		while (argv[j][i] != '\0') //checks for non-numbers
+ 		while (strs[j][i] != '\0') //checks for non-numbers
  		{
- 			if (ft_isdigit(argv[j][i]) == 0)
+ 			if (ft_isdigit(strs[j][i]) == 0)
  				ft_error();
  			i++;
  		}
- 		i = 0;
  		j++;
  	}
+	return (strs);
 }

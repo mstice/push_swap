@@ -39,9 +39,9 @@ void	input_stack(int argc, char **argv)
 
 	printf("stack a: ");
 	a = NULL;
-	j = 1;
-	if (argc == 2)
-		j = 0;
+	j = 0;
+	if (argc == 0)
+		ft_error();
 	while (argv[j] != NULL)
 	{
 		n = ft_atol(argv[j++]);
@@ -50,7 +50,7 @@ void	input_stack(int argc, char **argv)
 		a = add_at_end(a, n);
 		printf("%d ", a -> nbr);
 	}
-	printf("\na is this %d", a -> nbr);
+	printf("\ntail: %d\n", a -> nbr);
 	head = a;
 	while (head->next != a)  // Loop through each node
 	{
@@ -63,5 +63,8 @@ void	input_stack(int argc, char **argv)
 		}
 		head = head->next;
 	}
- 	printf("\nsorted: %d \n", sorted(a));
+ 	if (a -> next == a)
+		ft_error();
+	//testing
+	//rra(a, 'a');
 }
