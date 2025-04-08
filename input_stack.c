@@ -29,7 +29,7 @@ static long	ft_atol(const char *nptr)
 	return (number * sign);
 }
 
-void	input_stack(int argc, char **argv)
+struct s_stack *input_stack(int argc, char **argv)
 {
 	struct s_stack	*a;
 	struct s_stack	*head;
@@ -37,7 +37,7 @@ void	input_stack(int argc, char **argv)
 	int				j;
 	long			n;
 
-	printf("stack a: ");
+	//printf("stack a: ");
 	a = NULL;
 	j = 0;
 	if (argc == 0)
@@ -48,9 +48,9 @@ void	input_stack(int argc, char **argv)
 		if (n > INT_MAX || n < INT_MIN)
 			ft_error();
 		a = add_at_end(a, n);
-		printf("%d ", a -> nbr);
+		//printf("%d ", a -> nbr);
 	}
-	printf("\ntail: %d\n", a -> nbr);
+	//printf("\nsorted: %d\n", sorted(a));
 	head = a;
 	while (head->next != a)  // Loop through each node
 	{
@@ -65,6 +65,5 @@ void	input_stack(int argc, char **argv)
 	}
  	if (a -> next == a)
 		ft_error();
-	//testing
-	//rra(a, 'a');
+	return(a);
 }

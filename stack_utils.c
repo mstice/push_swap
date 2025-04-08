@@ -4,6 +4,8 @@ struct s_stack *add_to_empty(int data)
 {
 	struct s_stack	*new = malloc(sizeof(struct s_stack));
 
+	if (!new)
+		return (NULL);
 	new -> prev = new;
 	new -> nbr = data;
 	new -> next = new;
@@ -14,7 +16,7 @@ struct s_stack	*add_at_beg(struct s_stack *tail, int data)
 {
 	struct s_stack *newP = add_to_empty(data);
 	struct s_stack *temp;
-
+	
 	if (tail == NULL)
 		return (newP);
 	else
@@ -32,7 +34,7 @@ struct s_stack *add_at_end(struct s_stack *tail, int data)
 {
 	struct s_stack *newP = add_to_empty(data);
 	struct s_stack *temp;
-
+	
 	if (tail == NULL)
 		return (newP);
 	else
@@ -55,13 +57,13 @@ struct s_stack	*del_first(struct s_stack *tail)
 		return(tail);
 	temp = tail -> next;
 	if (temp == tail)
-	{
+	{	
 		free(tail);
 		tail = NULL;
 		return (tail);
 	}
-	tail -> next = temp -> next;
-	temp -> next -> prev = tail;
+	tail->next = temp->next;
+	temp->next->prev = tail;
 	free(temp);
 	return (tail);
 }
@@ -96,7 +98,8 @@ void	print(struct s_stack *tail)
 		struct s_stack *temp = tail -> next;
 		do
 		{
-			printf("%d ", temp -> nbr);
+			printf(" %d", temp -> nbr);
+			printf("(ei:%d)", temp -> index);
 			temp = temp -> next;
 		} while (temp != tail -> next);
 	}
@@ -105,28 +108,40 @@ void	print(struct s_stack *tail)
 
 // int main(void)
 // {
-// 	struct s_stack *a;
+// 	struct s_stack *a = NULL;
+// 	struct s_stack *b = NULL;
 	
 // 	a = add_to_empty(34);
 // 	a = add_at_beg(a, 20);
 // 	a = add_at_end(a, 72);
 // 	a = add_at_end(a, 21);
-// 	//a = del_last(a);
-// 	//a = del_first(a);
+// 	a = del_first(a);
+// 	b = add_to_empty(101);
+// 	b = add_at_end(b, 202);
+// 	pa(&b, &a);
+// 	a = del_last(a);
+// 	a = del_first(a);
 
 // 	if (a == NULL)
-// 		printf("List is empty"), exit(1);
+// 		printf("List is empty");
 // 	else
-// 	{
-// 		struct s_stack *temp = a -> next;
-// 		printf("%d ", temp -> nbr);
-// 		temp = temp -> next;
-// 		while (temp != a -> next)
-// 		{
-// 			printf("%d ", temp -> nbr);
-// 			temp = temp -> next;
-// 		}
-// 	}
-// 	printf("%d ", sorted(a));
+// 		printf("stack a: "), print(a);
+// 	if (b == NULL)
+// 		printf("List is empty");
+// 	else
+// 		printf("stack b: "), print(b);
+	
+// 	// else
+// 	// {
+// 	// 	struct s_stack *temp = a -> next;
+// 	// 	printf("%d ", temp -> nbr);
+// 	// 	temp = temp -> next;
+// 	// 	while (temp != a -> next)
+// 	// 	{
+// 	// 		printf("%d ", temp -> nbr);
+// 	// 		temp = temp -> next;
+// 	// 	}
+// 	// }
+// 	//printf("%d ", sorted(a));
 // 	return (0);
 // }

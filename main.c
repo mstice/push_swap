@@ -9,34 +9,26 @@ void 	ft_error(void)
 	write(2, "Error\n", 6), exit(1);
 }
 
-
 int	main(int argc, char **argv)
 {
-	// int	j;
-	char **strs;
+	char	**strs;
+	int		argn;
+	struct s_stack *a;
 	
 	if (argc == 1)
 		exit(1);
-	//if (argc == 2)
-		//will still have to process this
 	strs = input_check(argc, argv);
-	input_stack(argc, strs);
-	// if (argc == 3)
-	// 	bi_sort();
-	// else if (argc == 4)
-	// 	tri_sort();
-	// else if (argc == 5)
-	// 	quad_sort();
-	// else if (argc == 6)
-	// 	quint_sort();
+	argn = argc_counter(strs);
+	a = input_stack(argn, strs);
+	if (sorted(a))
+		ft_putstr_fd("Numbers are already sorted!", 1), exit(0);
+	sort_index(a, argn);
+//	printf("stack a: "), print(a);
+	if (argn > 1 && argn < 6)
+		mini_sort(&a, argn);
 	// else
 	// 	multi_sort();
-	// j = 1;
-	// printf("ARGV: ");
-	// while (argv[j] != NULL)
-	// 	printf("%s ", argv[j++]);
-	printf("\n");
-
+//	printf("new stack a: "), print(a);
 	//free all nodes
 	return(0);
 }

@@ -26,3 +26,13 @@ char **input_check(int argc, char **argv)
  	}
 	return (strs);
 }
+
+int	argc_counter(char **strs)
+{
+	int	j;
+
+	j = 0;
+	while (strs[j] != NULL)
+		j++;
+	return (j);
+}
