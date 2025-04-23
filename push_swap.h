@@ -57,9 +57,8 @@ void	sext_sort(struct s_stack **tail);
 //multi sort
 int		case_counter(int ei, int p, struct s_stack *tail_b);
 void	multi_sort(struct s_stack **a, int argn);
-void	quicksort(struct s_stack **a, int argn);
-void	quickdivision(struct s_stack **a, int argn);
-
+void quicksort_a(t_stack **a, t_stack **b, int argn);
+void	quicksort_b(t_stack **a, t_stack **b, int argn);
 
 //sorting utils
 int		sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascending order
@@ -67,6 +66,7 @@ int		rev_sorted(struct s_stack *tail); //returns TRUE if stack is sorted in desc
 int		getmax(t_stack *tail);
 int		getmin(t_stack *tail);
 int		find_median(struct s_stack *tail, int argn);
+int		stack_size(t_stack *tail);
 
 int		is_tri(struct s_stack *tail);
 

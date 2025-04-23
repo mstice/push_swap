@@ -103,6 +103,21 @@ int find_median(struct s_stack *tail, int argn)
 	return (median);
 }
 
+int stack_size(t_stack *tail)
+{
+	int count;
+
+    if (!tail)
+        return 0;
+    count = 1;
+    t_stack *current = tail->next;  // head
+    while (current != tail)
+    {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
 
 int	is_tri(struct s_stack *tail)
 {
