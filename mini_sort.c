@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	mini_sort(struct s_stack **tail, int argn)
+void	mini_sort(struct s_stack **a, int argn)
 {
 	if (argn == 2)
 		bi_sort(a);
@@ -10,14 +10,18 @@ void	mini_sort(struct s_stack **tail, int argn)
 		quad_sort(a);
 	else if (argn == 5)
 		quint_sort(a);
+	// else if (argn == 6)
+	// 	sext_sort(a);
 }
 
 void	bi_sort(struct s_stack **tail)
 {
 	struct s_stack *head;
 
+	if (sorted(*tail))
+		return ;
 	head = (*tail) -> next;
-	if (head -> nbr > (*tail) -> nbr)
+	if (head->nbr > (*tail)->nbr)
 		sa(tail, 'a');
 	return ;
 }
@@ -28,12 +32,12 @@ void	tri_sort(struct s_stack **tail)
 	int b;
 	int c;
 
+	if (sorted(*tail)) //123
+		return ;
 	a = (*tail) -> next -> nbr;
 	b = (*tail) -> next -> next -> nbr;
 	c = (*tail) -> nbr;
-	if (sorted(*tail) == 1) //123
-		return ;
-	else if (a < b && a < c && b > c)
+	if (a < b && a < c && b > c)
 		rra(tail, 'a'), sa(tail, 'a');
 	else if (a > b && a < c)
 		sa(tail, 'a');
@@ -45,7 +49,8 @@ void	tri_sort(struct s_stack **tail)
 		sa(tail, 'a'), rra(tail, 'a');
 	else
 		ft_error();
-	return ;
+	if (sorted(*tail))
+		return ;
 }
 
 void	quad_sort(struct s_stack **tail)
@@ -56,7 +61,7 @@ void	quad_sort(struct s_stack **tail)
 	int		c;
 	int		d;
 
-	if (sorted(*tail) == 1)
+	if (sorted(*tail))
 		return ;
 	tail_b = NULL;
 	a = (*tail)->next->nbr;
@@ -74,146 +79,71 @@ void	quad_sort(struct s_stack **tail)
 		rra(tail, 'a'), sa(tail, 'a'), ra(tail, 'a'), ra(tail, 'a');
 	else if (a > b && a > c && a > d)
 		ra(tail, 'a');
-	if (sorted(*tail) == 1)
+	if (sorted(*tail))
 		return ;
 }
 
-// void	quint_sort(struct s_stack **tail)
-// {
-// 	struct s_stack *b;
-// 	int		diff = 0;
+void	quint_sort(struct s_stack **tail)
+{
+	struct s_stack *b = NULL;
+	int				n;
+	int				median;
 
-// 	if (sorted(*tail) == 1)
+	if (sorted(*tail))
+		return ;
+	n = 5;
+	median = n/2;
+	while (n > (median + 1)) //if odd number, has to be median + 1
+	{
+		if ((*tail)->next->ei <= median) //can do some more optimisation here
+			pb(tail, &b), n--;
+		else
+			ra(tail, 'a');
+	}
+	tri_sort(tail);
+	if (sorted(b))
+		sa(&b, 'b');
+	while (n < 5)
+	{
+		if ((*tail)->next->ei - b->next->ei == 1)
+			pa(&b, tail), n++;
+		else
+			ra(tail, 'a');
+	}
+	if (sorted(*tail))
+		return ;
+	else
+		ft_putstr_fd("quint sort failed", 1);
+	return ;
+}
+
+// void	sext_sort(struct s_stack **tail)
+// {
+// 	struct s_stack *b = NULL;
+// 	int				n;
+// 	int				median;
+// 	if (sorted(*tail))
 // 		return ;
-// 	b = NULL;
-// 	pb(tail, &b);
-// 	printf("stack b:"), print(b);
-// 	quad_sort(tail);
-// 	pa(&b, tail);
-// 	while (n != argn)
+// 	n = 6;
+// 	median = find_median(*tail, n);
+// 	while (n >= median) //if even number, has to be n >= median
 // 	{
-// 		head_a = (*tail)->next->nbr;
-// 		head_b = b->next->nbr;
-// 		if (head_a > head_b && n != argn)
-// 			pa(&b, tail), n++;
-// 		head_a = (*tail)->next->nbr;
-// 		head_b = b->next->nbr;
-// 		if (head_a < head_b && n != argn)
-// 		{
+// 		if ((*tail)->next->ei <= median)
+// 			pb(tail, &b), n--;
+// 		else
 // 			ra(tail, 'a');
-// 			//printf("Hello");
-// 		}
-// 		if (n == argn)
-// 			break ;
 // 	}
-// 	if (sorted(*tail) == 1)
+// 	tri_sort(tail), tri_sort(&b), sa(&b, 'b'), ra(&b, 'b');
+// 	while (n < 6)
+// 	{
+// 		if ((*tail)->next->ei - b->next->ei == 1)
+// 			pa(&b, tail), n++;
+// 		else
+// 			ra(tail, 'a');
+// 	}
+// 	if (sorted(*tail))
 // 		return ;
+// 	else
+// 		ft_putstr_fd("sext sort failed", 1);
+// 	return ;
 // }
-
-
-
-// static void	update_abcd(struct s_stack **tail, struct s_stack **a,	struct s_stack **b, struct s_stack **c, struct s_stack **d)
-// {
-// 	*a = (*tail)->next;
-// 	*b = (*tail)->next->next;
-// 	*d = (*tail)->prev;
-// 	*c = (*tail)->prev->prev;
-// }
-
-// void quad_sort(struct s_stack **tail)
-// {
-
-// 	if (sorted(*tail) == 1)
-// 		ft_putstr_fd("Numbers are already sorted!\n", 1), return ;
-// 	if ((*tail)->next->nbr > (*tail)->next->next->nbr && !sorted(*tail)) //a > b
-// 		sa(tail, 'a');
-// 	while((*tail)->next->nbr > (*tail)->nbr && !sorted(*tail)) // a > d
-// 		rra(tail, 'a');
-// 	if ((*tail)->next->nbr > (*tail)->next->next->nbr && !sorted(*tail)) //a > b
-// 		sa(tail, 'a');
-// 	if ((*tail)->next->next->nbr < (*tail)->prev->nbr && !sorted(*tail)) // b < c
-// 	{
-// 		if (a < b && c > d)
-// 			rra(tail, 'a'), rra(tail, 'a'), sa(tail, 'a'), ra(tail, 'a'), ra(tail, 'a');
-// 		else if (a < b && c < d)
-// 			sa(tail, 'a'), rra(tail, 'a'), sa(tail, 'a'), rra(tail, 'a'), rra(tail, 'a');
-// 	}
-// 	else if ((*tail)->next->next->nbr > (*tail)->prev->nbr && !sorted(*tail)) // b > c
-// 	{
-// 		if(a < b && c < d)
-// 		else if (a < b)
-// 		else if (c < d)
-// 	}
-// }
-
-// void	quad_sort(struct s_stack **tail)
-// {
-// 	struct s_stack *a;
-// 	struct s_stack *b;
-// 	struct s_stack *c;
-// 	struct s_stack *d;
-
-// 	update_abcd(tail, &a, &b, &c, &d);
-// 	if (sorted(*tail) == 1)
-// 	{
-// 		ft_putstr_fd("Numbers are already sorted!\n", 1);
-// 		return ;
-// 	}
-// 	if (a -> nbr > b -> nbr && sorted(*tail) != 1)
-// 		sa(tail, 'a'), 	update_abcd(tail, &a, &b, &c, &d);
-// 	if (sorted(*tail) != 1)
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	if (sorted(*tail) != 1)
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	if (a -> nbr > b -> nbr && sorted(*tail) != 1)
-// 		sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	if (a -> nbr < c -> nbr && sorted(*tail) != 1) //1 is at the top
-// 	{
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail,'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail,'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		if (a -> nbr > b -> nbr && sorted(*tail) != 1)
-// 			sa(tail, 'a'), 	update_abcd(tail, &a, &b, &c, &d);		;
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		if (a -> nbr > b -> nbr && sorted(*tail) != 1)
-// 			sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	}
-// 	if (a -> nbr > c -> nbr && sorted(*tail) != 1) //1 is at the top
-// 	{
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail,'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail,'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	}
-// 	//if 1 before, do original checks
-// 	//if 2 before, 
-// 	if (a -> nbr > b -> nbr && sorted(*tail) != 1)
-// 	{
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	}
-// 	if (a -> nbr > b -> nbr && sorted (*tail) != 1)
-// 		sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	if (c -> nbr > d -> nbr && sorted(*tail) != 1) // before c
-// 	{
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		rra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		sa(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 		ra(tail, 'a'), update_abcd(tail, &a, &b, &c, &d);
-// 	}
-// 	if (sorted(*tail) == 1)
-// 		return ;
-// }
-
-// //2 3 1 4
-// //3 2 1 4
-

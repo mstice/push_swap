@@ -47,7 +47,7 @@ struct s_stack *input_stack(int argc, char **argv)
 		n = ft_atol(argv[j++]);
 		if (n > INT_MAX || n < INT_MIN)
 			ft_error();
-		a = add_at_end(a, n);
+		a = add_at_end(a, n, 0);
 		//printf("%d ", a -> nbr);
 	}
 	//printf("\nsorted: %d\n", sorted(a));

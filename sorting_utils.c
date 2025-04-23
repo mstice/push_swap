@@ -5,8 +5,7 @@ int	sorted(struct s_stack *tail)
 	struct s_stack *head;
 
 	head = tail -> next;
-	
-	while ((head != tail) && head -> nbr < head -> next -> nbr)
+	while (head != tail && head -> nbr < head -> next -> nbr)
 		head = head -> next;
 	if (head == tail)
 		return (1);
@@ -14,84 +13,114 @@ int	sorted(struct s_stack *tail)
 		return (0);
 }
 
-void	assign_index(struct s_stack **tail_a, int *arr, int argn)
+int	rev_sorted(struct s_stack *tail)
 {
-	struct s_stack *temp;
-	int				i;
+	struct s_stack *head;
 
-	temp = (*tail_a)->next;
-	i = 0;
-	while (i != argn)
-	{
-		if (temp -> nbr == arr[i])
-		{
-			temp -> index = i + 1;
-			i++;
-		}
-		else
-			temp = temp -> next;
-	}
-	return ;
-	printf("stack a:");
-	print(*tail_a);
+	head = tail -> next;
+	while (head != tail && head -> nbr > head -> next -> nbr)
+		head = head -> next;
+	if (head == tail)
+		return (1);
+	else //if (head != tail && head -> nbr >= head -> next -> nbr)
+		return (0);
 }
 
-void	sort_index(struct s_stack *tail_a, int argn)//takes stack and puts it into array, and bubble sorts it
+int getmax(t_stack *tail)
 {
-	int				arr[argn];
 	struct s_stack *temp;
-	int				i;
-	int				j;
-	int				t;
-	
-	i = 0;
-	temp = tail_a->next;
-	while (i < argn)
-	{
-		arr[i] = temp -> nbr;
-		temp = temp -> next;
-		i++;
-	}
-	i = 0;
-	while (i < argn)
-	{
-		j = 0;
-		while (j < (argn - 1))
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				t = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = t;
-			}
-			j++;
-		}
-		i++;
-	}
-	j = 0;
-	printf("arr:");
-	while (j != argn)
-		printf("%d ", arr[j++]);
-	assign_index(&tail_a, arr, argn);
-	printf("\n");
-	printf("stack a:");
-	print(tail_a);
-}
+	int				max;
 
-
-int	big(t_stack *tail)
-{
-	t_stack	*temp;
-	int		big;
-
-	temp = tail -> next;
-	big = temp -> nbr;
-	temp = temp -> next;
+	temp = tail->next;
+	max = temp->ei;
 	while (temp != tail)
 	{
-		if(temp -> nbr > big)
-			big = temp -> nbr;
-		temp = temp -> next;
+		if (temp->ei > max)
+			max = temp->ei;
+		temp = temp->next;
 	}
-	return (big);
+	if (temp->ei > max)
+		max = temp->ei;
+	return (max);
 }
+
+int getmin(t_stack *tail)
+{
+	struct s_stack *temp;
+	int				min;
+
+	temp = tail->next;
+	min = temp->ei;
+	while (temp != tail)
+	{
+		if (temp->ei < min)
+			min = temp->ei;
+		temp = temp->next;
+	}
+	if (temp->ei < min)
+		min = temp->ei;
+	return (min);
+}
+
+// int	find_median(struct s_stack *tail, int argn)
+// {
+// 	struct s_stack *temp;
+// 	int				median;
+// 	temp = tail -> next;
+// 	while (temp != tail)
+// 	{
+// 		if (temp->ei == (argn/2))
+// 		{
+// 			median = temp->ei;
+// 			break ;
+// 		}
+// 		else
+// 			temp = temp->next;
+// 	}
+// 	return (median);
+// }
+
+int find_median(struct s_stack *tail, int argn)
+{
+	int 			min;
+	int 			max;
+	struct s_stack *temp;
+	int				median;
+
+	if (argn < 0)
+		return (0);
+	min = getmin(tail);
+	//printf("hello, min:%d ", min);
+	max = getmax(tail);
+	//printf("hello, max:%d ", max);
+	temp = tail->next;
+	while (temp->ei != min && temp->ei != max && temp != tail)
+		temp = temp->next;
+	if (temp->ei == min)
+		median = temp->ei + argn/2;
+	else if (temp->ei == max)
+		median = temp->ei - argn/2;
+	return (median);
+}
+
+
+int	is_tri(struct s_stack *tail)
+{
+	struct s_stack *head;
+	int				n;
+
+	head = tail -> next;
+	n = 0;
+	while (head != tail && n != 3)
+	{
+		n++;
+		head = head -> next;
+	}
+	if (n == 3 && head == tail)
+		return (1);
+	else
+		return (0);
+}
+
+//getmax
+//countingsort
