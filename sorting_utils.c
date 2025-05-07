@@ -13,7 +13,7 @@ int	sorted(struct s_stack *tail)
 		return (0);
 }
 
-int	rev_sorted(struct s_stack *tail)
+int	revsorted(struct s_stack *tail)
 {
 	struct s_stack *head;
 
@@ -62,24 +62,6 @@ int getmin(t_stack *tail)
 	return (min);
 }
 
-// int	find_median(struct s_stack *tail, int argn)
-// {
-// 	struct s_stack *temp;
-// 	int				median;
-// 	temp = tail -> next;
-// 	while (temp != tail)
-// 	{
-// 		if (temp->ei == (argn/2))
-// 		{
-// 			median = temp->ei;
-// 			break ;
-// 		}
-// 		else
-// 			temp = temp->next;
-// 	}
-// 	return (median);
-// }
-
 int find_median(struct s_stack *tail, int argn)
 {
 	int 			min;
@@ -118,24 +100,3 @@ int stack_size(t_stack *tail)
     }
     return count;
 }
-
-int	is_tri(struct s_stack *tail)
-{
-	struct s_stack *head;
-	int				n;
-
-	head = tail -> next;
-	n = 0;
-	while (head != tail && n != 3)
-	{
-		n++;
-		head = head -> next;
-	}
-	if (n == 3 && head == tail)
-		return (1);
-	else
-		return (0);
-}
-
-//getmax
-//countingsort

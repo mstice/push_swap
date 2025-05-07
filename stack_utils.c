@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-struct s_stack *add_to_empty(int data, int ei) //adapted to ei
+struct s_stack	*add_to_empty(int data, int ei) //adapted to ei
 {
 	struct s_stack	*new = malloc(sizeof(struct s_stack));
 
@@ -32,7 +32,7 @@ struct s_stack	*add_at_beg(struct s_stack *tail, int data, int ei) //adapted to 
 	}
 }
 
-struct s_stack *add_at_end(struct s_stack *tail, int data, int ei) //adapted to ei
+struct s_stack	*add_at_end(struct s_stack *tail, int data, int ei) //adapted to ei
 {
 	struct s_stack *newP = add_to_empty(data, ei);
 	struct s_stack *temp;
@@ -70,7 +70,7 @@ struct s_stack	*del_first(struct s_stack *tail)
 	return (tail);
 }
 
-struct s_stack *del_last(struct s_stack *tail)
+struct s_stack	*del_last(struct s_stack *tail)
 {
 	struct s_stack	*temp;
 
@@ -105,9 +105,22 @@ void	print(struct s_stack *tail)
 		} while (temp != tail -> next);
 	}
 	printf("\nsorted: %d ", sorted(tail));
-	printf("rev_sorted: %d\n", rev_sorted(tail));
+	printf("revsorted: %d\n", revsorted(tail));
 }
 
+void	free_list(t_stack **tail)
+{
+	t_stack *temp;
+	int n;
+
+	n = 18;
+	while (n > 0)
+	{
+		temp = (*tail)->next;
+		free(temp);
+		n--;
+	}
+}
 // int main(void)
 // {
 // 	struct s_stack *a = NULL;

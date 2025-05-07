@@ -35,6 +35,8 @@ struct s_stack	*add_at_beg(struct s_stack *tail, int data, int ei); //adds a new
 struct s_stack	*add_at_end(struct s_stack *tail, int data, int ei); //adds a new node at the end
 struct s_stack	*del_first(struct s_stack *tail); //deletes the first node
 struct s_stack	*del_last(struct s_stack *tail); //deletes the last node
+void	print(struct s_stack *tail);
+void	free_list(t_stack **tail);
 
 //sorting functions
 void	sa(struct s_stack **tail, char stack_name); //also sb
@@ -52,24 +54,24 @@ void	bi_sort(struct s_stack **tail);
 void	tri_sort(struct s_stack **tail);
 void	quad_sort(struct s_stack **tail);
 void	quint_sort(struct s_stack **tail);
-void	sext_sort(struct s_stack **tail);
+//void	sext_sort(struct s_stack **tail);
+
+//mini revsort
+void	mini_revsort(t_stack **a, int argn);
+void	bi_revsort(t_stack **tail);
+void	tri_revsort(t_stack **tail);
 
 //multi sort
-int		case_counter(int ei, int p, struct s_stack *tail_b);
-void	multi_sort(struct s_stack **a, int argn);
-void quicksort_a(t_stack **a, t_stack **b, int argn);
+void	quicksort_a(t_stack **a, t_stack **b, int argn);
 void	quicksort_b(t_stack **a, t_stack **b, int argn);
 
 //sorting utils
 int		sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascending order
-int		rev_sorted(struct s_stack *tail); //returns TRUE if stack is sorted in descending order
+int		revsorted(struct s_stack *tail); //returns TRUE if stack is sorted in descending order
 int		getmax(t_stack *tail);
 int		getmin(t_stack *tail);
 int		find_median(struct s_stack *tail, int argn);
 int		stack_size(t_stack *tail);
-
-int		is_tri(struct s_stack *tail);
-
 
 //freeing functions
 //void	free_list(struct s_stack *tail) //make sure to free index_offset when the last node is freed

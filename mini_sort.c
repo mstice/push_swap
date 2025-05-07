@@ -37,15 +37,15 @@ void	tri_sort(struct s_stack **tail)
 	a = (*tail) -> next -> nbr;
 	b = (*tail) -> next -> next -> nbr;
 	c = (*tail) -> nbr;
-	if (a < b && a < c && b > c)
+	if (a < b && a < c && b > c) //1 3 2
 		rra(tail, 'a'), sa(tail, 'a');
-	else if (a > b && a < c)
+	else if (a > b && a < c) // 2 1 3
 		sa(tail, 'a');
-	else if (a < b && a > c)
+	else if (a < b && a > c) // 2 3 1
 		rra(tail, 'a');
-	else if (a > b && a > c && b < c)
+	else if (a > b && a > c && b < c) //3 1 2
 		ra(tail, 'a');
-	else if (a > b && a > c && b > c)
+	else if (a > b && a > c && b > c) // 3 2 1
 		sa(tail, 'a'), rra(tail, 'a');
 	else
 		ft_error();
@@ -71,7 +71,7 @@ void	quad_sort(struct s_stack **tail)
 	pb(tail, &tail_b);
 	tri_sort(tail);
 	pa(&tail_b, tail);
-	if (a < b && a < c && a < d)
+	if (a < b && a < c && a < d) //if a is 1
 		return ;
 	else if ((a < b && a < c && a > d) || (a < b && a > c && a < d) || (a > b && a < c && a < d))
 		sa(tail, 'a');
