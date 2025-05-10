@@ -1,5 +1,6 @@
-NAME := push_swap.a
-LIBFT := libft/libft.a
+NAME := push_swap
+LIBFT_DIR := libft
+LIBFT := $(LIBFT_DIR)/libft.a
 
 SOURCES := $(wildcard *.c)
 OBJECTS := $(SOURCES:.c=.o)
@@ -7,45 +8,31 @@ OBJECTS := $(SOURCES:.c=.o)
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -g3
 
-AR := ar
-ARFLAGS := -rcs
-
 RM := rm -f
 
 # Compile .c files into .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Ensure object files are built before linking push_swap.a
+# Build final executable
 $(NAME): $(LIBFT) $(OBJECTS)
-	$(AR) $(ARFLAGS) $(NAME) $(LIBFT) $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(LIBFT)
 
-# $(LIBFT):
-# 	@$(MAKE) -C libft
-# 	@cp $(LIBFT) libft.a
-# 	@ar rcs libft.a $(OBJ)
-# 	$(RM) libft.a
-
+# Build libft
 $(LIBFT):
-	@$(MAKE) -C libft
-	@cp $(LIBFT) libft.a
-	$(AR) $(ARFLAGS) libft.a $(OBJ)
-	@mv libft.a $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR)
 
-
-# Run 'make' to build everything
-all: $(LIBFT) $(NAME)
+# Default target
+all: $(NAME)
 
 # Clean object files and libft objects
 clean:
-	@$(MAKE) clean -C libft
-	$(RM) libft.a
+	@$(MAKE) clean -C $(LIBFT_DIR)
 	$(RM) $(OBJECTS)
 
-# Fully clean everything including the library and compiled archive
+# Fully clean everything including the library and executable
 fclean: clean
-	@$(MAKE) fclean -C libft
-	$(RM) libft.a
+	@$(MAKE) fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 # Rebuild everything

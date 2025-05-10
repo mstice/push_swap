@@ -1,7 +1,7 @@
 #include "push_swap.h"
-void	assign_index(struct s_stack **tail_a, int *arr, int argn)
+void	assign_index(t_stack **tail_a, int *arr, int argn)
 {
-	struct s_stack *temp;
+	t_stack *temp;
 	int				i;
 
 	temp = (*tail_a)->next;
@@ -21,10 +21,10 @@ void	assign_index(struct s_stack **tail_a, int *arr, int argn)
 	print(*tail_a);
 }
 
-void	sort_index(struct s_stack *tail_a, int argn)//takes stack and puts it into array, and bubble sorts it
+void	sort_index(t_stack *tail_a, int argn)//takes stack and puts it into array, and bubble sorts it
 {
 	int				arr[argn];
-	struct s_stack *temp;
+	t_stack *temp;
 	int				i;
 	int				j;
 	int				t;

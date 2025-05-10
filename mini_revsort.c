@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-void	mini_revsort(t_stack **b, int argn)
+void	mini_revsort(t_stack **b, int size_b)
 {
-	if (argn == 2)
+	if (size_b == 2)
 		bi_revsort(b);
-	else if (argn == 3)
+	else if (size_b == 3)
 		tri_revsort(b);
 	// else if (argn == 4)
 	// 	quad_revsort(b);
@@ -12,39 +12,39 @@ void	mini_revsort(t_stack **b, int argn)
 	// 	quint_revsort(b);
 }
 
-void	bi_revsort(t_stack **tail)
+void	bi_revsort(t_stack **b)
 {
 	t_stack *head;
 
-	if (revsorted(*tail))
+	if (revsorted(*b))
 		return ;
-	head = (*tail)->next;
-	if (head->nbr < (*tail)->nbr)
-		sa(tail, 'b');
+	head = (*b)->next;
+	if (head->nbr < (*b)->nbr)
+		sa(b, 'b');
 }
 
-void	tri_revsort(t_stack **tail)
+void	tri_revsort(t_stack **b)
 {
-	int	a;
-	int	b;
-	int c;
+	int	w;
+	int	x;
+	int y;
 
-	if (revsorted(*tail)) //3 2 1
+	if (revsorted(*b)) //3 2 1
 		return ;
-	a = (*tail)->next->nbr;
-	b = (*tail)->next->next->nbr;
-	c = (*tail)->nbr;
-	if (a < b && a < c && b < c) //1 2 3
-		sa(tail, 'b'), rra(tail, 'b');
-	else if (a < b && a < c && b > c) //1 3 2
-		ra(tail, 'b');
-	else if (a > b && a < c) //2 1 3
-		rra(tail, 'b');
-	else if (a < b && a > c) //2 3 1
-		sa(tail, 'b');
-	else if (a > b && a > c && b < c) // 3 1 2
-		rra(tail, 'b'), sa(tail, 'b');
-	if(revsorted(*tail))
+	w = (*b)->next->nbr;
+	x = (*b)->next->next->nbr;
+	y = (*b)->nbr;
+	if (w < x && w < y && x < y) //1 2 3
+		sa(b, 'b'), rra(b, 'b');
+	else if (w < x && w < y && x > y) //1 3 2
+		ra(b, 'b');
+	else if (w > x && w < y) //2 1 3
+		rra(b, 'b');
+	else if (w < x && w > y) //2 3 1
+		sa(b, 'b');
+	else if (w > x && w > y && x < y) // 3 1 2
+		rra(b, 'b'), sa(b, 'b');
+	if(revsorted(*b))
 		return ;
 	else
 		ft_putstr_fd("tri_revsort failed", 2);

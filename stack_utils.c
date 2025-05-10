@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-struct s_stack	*add_to_empty(int data, int ei) //adapted to ei
+t_stack	*add_to_empty(int data, int ei) //adapted to ei
 {
-	struct s_stack	*new = malloc(sizeof(struct s_stack));
+	t_stack	*new = malloc(sizeof(t_stack));
 
 	if (!new)
 		return (NULL);
@@ -13,10 +13,10 @@ struct s_stack	*add_to_empty(int data, int ei) //adapted to ei
 	return (new);
 }
 
-struct s_stack	*add_at_beg(struct s_stack *tail, int data, int ei) //adapted to ei
+t_stack	*add_at_beg(t_stack *tail, int data, int ei) //adapted to ei
 {
-	struct s_stack *newP = add_to_empty(data, ei);
-	struct s_stack *temp;
+	t_stack *newP = add_to_empty(data, ei);
+	t_stack *temp;
 	
 	newP -> ei = ei;
 	if (tail == NULL)
@@ -32,10 +32,10 @@ struct s_stack	*add_at_beg(struct s_stack *tail, int data, int ei) //adapted to 
 	}
 }
 
-struct s_stack	*add_at_end(struct s_stack *tail, int data, int ei) //adapted to ei
+t_stack	*add_at_end(t_stack *tail, int data, int ei) //adapted to ei
 {
-	struct s_stack *newP = add_to_empty(data, ei);
-	struct s_stack *temp;
+	t_stack *newP = add_to_empty(data, ei);
+	t_stack *temp;
 	
 	if (tail == NULL)
 		return (newP);
@@ -51,9 +51,9 @@ struct s_stack	*add_at_end(struct s_stack *tail, int data, int ei) //adapted to 
 	}
 }
 
-struct s_stack	*del_first(struct s_stack *tail)
+t_stack	*del_first(t_stack *tail)
 {
-	struct s_stack *temp;
+	t_stack *temp;
 
 	if (tail == NULL)
 		return(tail);
@@ -70,9 +70,9 @@ struct s_stack	*del_first(struct s_stack *tail)
 	return (tail);
 }
 
-struct s_stack	*del_last(struct s_stack *tail)
+t_stack	*del_last(t_stack *tail)
 {
-	struct s_stack	*temp;
+	t_stack	*temp;
 
 	if (tail == NULL)
 		return (tail);
@@ -90,13 +90,13 @@ struct s_stack	*del_last(struct s_stack *tail)
 	return (tail);
 }
 
-void	print(struct s_stack *tail)
+void	print(t_stack *tail)
 {
 	if (tail->next == NULL)
 		printf("no element in the list");
 	else
 	{
-		struct s_stack *temp = tail -> next;
+		t_stack *temp = tail -> next;
 		do
 		{
 			printf(" %d", temp -> nbr);
@@ -107,52 +107,3 @@ void	print(struct s_stack *tail)
 	printf("\nsorted: %d ", sorted(tail));
 	printf("revsorted: %d\n", revsorted(tail));
 }
-
-void	free_list(t_stack **tail)
-{
-	t_stack *temp;
-	int n;
-
-	n = 18;
-	while (n > 0)
-	{
-		temp = (*tail)->next;
-		free(temp);
-		n--;
-	}
-}
-// int main(void)
-// {
-// 	struct s_stack *a = NULL;
-// 	struct s_stack *b = NULL;
-// 	a = add_to_empty(34);
-// 	a = add_at_beg(a, 20);
-// 	a = add_at_end(a, 72);
-// 	a = add_at_end(a, 21);
-// 	// a = del_first(a);
-// 	// b = add_to_empty(101);
-// 	// b = add_at_end(b, 202);
-// 	pb(&a, &b);
-// 	pb(&a, &b);
-// 	if (a == NULL)
-// 		printf("List is empty");
-// 	else
-// 		printf("stack a: "), print(a);
-// 	if (b == NULL)
-// 		printf("List is empty");
-// 	else
-// 		printf("stack b: "), print(b);
-// 	// else
-// 	// {
-// 	// 	struct s_stack *temp = a -> next;
-// 	// 	printf("%d ", temp -> nbr);
-// 	// 	temp = temp -> next;
-// 	// 	while (temp != a -> next)
-// 	// 	{
-// 	// 		printf("%d ", temp -> nbr);
-// 	// 		temp = temp -> next;
-// 	// 	}
-// 	// }
-// 	//printf("%d ", sorted(a));
-// 	return (0);
-// }

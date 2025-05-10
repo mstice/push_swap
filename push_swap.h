@@ -18,64 +18,66 @@ typedef struct	s_stack
 	int				ei; //expected index
 }				t_stack;
 
-//checking the input is valid and processing the input
-void			ft_error(void);
-char			**input_check(int argc, char **argv); //checks for non-numbers
-int				argc_counter(char **strs); //counts argcs, which needs to happen when input is a string
-struct s_stack	*input_stack(int argc, char **argv); //checks for ints, deletes zeroes and doubles
+//others
+void	ft_error(void);
+void	free_list(t_stack **tail, int stack_size);
+
+//input check
+char	**input_check(int argc, char **argv); //checks for non-numbers
+int		argc_counter(char **strs); //counts argcs, which needs to happen when input is a string
+t_stack	*input_stack(int argn, char **argv); //checks for ints, deletes zeroes and doubles
 
 //pre sort
-void	assign_index(struct s_stack **tail_a, int *arr, int argn); //updates expected index onto each node based on sorted array
-void	sort_index(struct s_stack *tail_a, int argn); //puts numbers onto array and sorts them using bubble sort
+void	assign_index(t_stack **tail_a, int *arr, int argn); //updates expected index onto each node based on sorted array
+void	sort_index(t_stack *tail_a, int argn); //puts numbers onto array and sorts them using bubble sort
 
 //stack utils
-struct s_stack	*add_to_empty(int data, int ei); //creates a new node
-//struct s_stack	*push_at_beg(struct s_stack *tail, int data, int ei);
-struct s_stack	*add_at_beg(struct s_stack *tail, int data, int ei); //adds a new node at the beginning of the stack
-struct s_stack	*add_at_end(struct s_stack *tail, int data, int ei); //adds a new node at the end
-struct s_stack	*del_first(struct s_stack *tail); //deletes the first node
-struct s_stack	*del_last(struct s_stack *tail); //deletes the last node
-void	print(struct s_stack *tail);
-void	free_list(t_stack **tail);
+t_stack	*add_to_empty(int data, int ei); //creates a new node
+t_stack	*add_at_beg(t_stack *tail, int data, int ei); //adds a new node at the beginning of the stack
+t_stack	*add_at_end(t_stack *tail, int data, int ei); //adds a new node at the end
+t_stack	*del_first(t_stack *tail); //deletes the first node
+t_stack	*del_last(t_stack *tail); //deletes the last node
+void	print(t_stack *tail);
 
 //sorting functions
-void	sa(struct s_stack **tail, char stack_name); //also sb
-void	ss(struct s_stack **tail_a, struct s_stack **tail_b); //sa and sb at the same time
-void	pa(struct s_stack **tail_b, struct s_stack **tail_a); //takes first element of b and puts it at the top of a
-void	pb(struct s_stack **tail_a, struct s_stack **tail_b); //takes first element of a and puts it at the top of b
-void	ra(struct s_stack **tail, char stack_name); //also rb
-void	rr(struct s_stack **tail_a, struct s_stack **tail_b);
-void	rra(struct s_stack **tail, char stack_name); //also rrb
-void	rrr(struct s_stack **tail_a, struct s_stack **tail_b);
+void	sa(t_stack **tail, char stack_name); //also sb
+void	ss(t_stack **tail_a, t_stack **tail_b); //sa and sb at the same time
+void	pa(t_stack **tail_b, t_stack **tail_a); //takes first element of b and puts it at the top of a
+void	pb(t_stack **tail_a, t_stack **tail_b); //takes first element of a and puts it at the top of b
+void	ra(t_stack **tail, char stack_name); //also rb
+void	rr(t_stack **tail_a, t_stack **tail_b);
+void	rra(t_stack **tail, char stack_name); //also rrb
+void	rrr(t_stack **tail_a, t_stack **tail_b);
 
 //mini sort
-void	mini_sort(struct s_stack **a, int argn);
-void	bi_sort(struct s_stack **tail);
-void	tri_sort(struct s_stack **tail);
-void	quad_sort(struct s_stack **tail);
-void	quint_sort(struct s_stack **tail);
-//void	sext_sort(struct s_stack **tail);
+void	mini_sort(t_stack **a, t_stack **b, int size_a);
+void	bi_sort(t_stack **a);
+void	tri_sort(t_stack **a);
+void	quad_sort(t_stack **a, t_stack **b);
+void	quint_sort(t_stack **a, t_stack **b);
+//void	sext_sort(t_stack **tail);
 
 //mini revsort
-void	mini_revsort(t_stack **a, int argn);
-void	bi_revsort(t_stack **tail);
-void	tri_revsort(t_stack **tail);
+void	mini_revsort(t_stack **b, int size_b);
+void	bi_revsort(t_stack **b);
+void	tri_revsort(t_stack **b);
 
-//multi sort
-void	quicksort_a(t_stack **a, t_stack **b, int argn);
-void	quicksort_b(t_stack **a, t_stack **b, int argn);
+//quicksort
+void	quicksort_a(t_stack **a, t_stack **b, int size_a);
+void	quicksort_b(t_stack **a, t_stack **b, int size_b);
 
 //sorting utils
-int		sorted(struct s_stack *tail); //returns TRUE if stack is sorted in ascending order
-int		revsorted(struct s_stack *tail); //returns TRUE if stack is sorted in descending order
+int		sorted(t_stack *tail); //returns TRUE if stack is sorted in ascending order
+int		revsorted(t_stack *tail); //returns TRUE if stack is sorted in descending order
 int		getmax(t_stack *tail);
 int		getmin(t_stack *tail);
-int		find_median(struct s_stack *tail, int argn);
-int		stack_size(t_stack *tail);
+int		find_median(t_stack *tail, int argn);
+int		stack_size(t_stack *tail); //TO DELETE
 
 //freeing functions
-//void	free_list(struct s_stack *tail) //make sure to free index_offset when the last node is freed
+//void	free_list(t_stack *tail) //make sure to free index_offset when the last node is freed
 
 //TO REMOVE
-void	print(struct s_stack *tail);
+void	print(t_stack *tail);
+
 #endif

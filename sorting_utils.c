@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-int	sorted(struct s_stack *tail)
+int	sorted(t_stack *tail)
 {
-	struct s_stack *head;
+	t_stack *head;
 
 	head = tail -> next;
 	while (head != tail && head -> nbr < head -> next -> nbr)
@@ -13,9 +13,9 @@ int	sorted(struct s_stack *tail)
 		return (0);
 }
 
-int	revsorted(struct s_stack *tail)
+int	revsorted(t_stack *tail)
 {
-	struct s_stack *head;
+	t_stack *head;
 
 	head = tail -> next;
 	while (head != tail && head -> nbr > head -> next -> nbr)
@@ -28,7 +28,7 @@ int	revsorted(struct s_stack *tail)
 
 int getmax(t_stack *tail)
 {
-	struct s_stack *temp;
+	t_stack *temp;
 	int				max;
 
 	temp = tail->next;
@@ -46,7 +46,7 @@ int getmax(t_stack *tail)
 
 int getmin(t_stack *tail)
 {
-	struct s_stack *temp;
+	t_stack *temp;
 	int				min;
 
 	temp = tail->next;
@@ -62,19 +62,17 @@ int getmin(t_stack *tail)
 	return (min);
 }
 
-int find_median(struct s_stack *tail, int argn)
+int find_median(t_stack *tail, int argn)
 {
 	int 			min;
 	int 			max;
-	struct s_stack *temp;
+	t_stack *temp;
 	int				median;
 
 	if (argn < 0)
 		return (0);
 	min = getmin(tail);
-	//printf("hello, min:%d ", min);
 	max = getmax(tail);
-	//printf("hello, max:%d ", max);
 	temp = tail->next;
 	while (temp->ei != min && temp->ei != max && temp != tail)
 		temp = temp->next;

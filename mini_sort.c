@@ -1,125 +1,116 @@
 #include "push_swap.h"
 
-void	mini_sort(struct s_stack **a, int argn)
+void	mini_sort(t_stack **a, t_stack **b, int size_a)
 {
-	if (argn == 2)
+	if (size_a == 2)
 		bi_sort(a);
-	else if (argn == 3)
+	else if (size_a == 3)
 		tri_sort(a);
-	else if (argn == 4)
-		quad_sort(a);
-	else if (argn == 5)
-		quint_sort(a);
+	else if (size_a == 4)
+		quad_sort(a, b);
+	else if (size_a == 5)
+		quint_sort(a, b);
 	// else if (argn == 6)
 	// 	sext_sort(a);
 }
 
-void	bi_sort(struct s_stack **tail)
+void	bi_sort(t_stack **a)
 {
-	struct s_stack *head;
+	t_stack *head;
 
-	if (sorted(*tail))
+	if (sorted(*a))
 		return ;
-	head = (*tail) -> next;
-	if (head->nbr > (*tail)->nbr)
-		sa(tail, 'a');
+	head = (*a) -> next;
+	if (head->nbr > (*a)->nbr)
+		sa(a, 'a');
 	return ;
 }
 
-void	tri_sort(struct s_stack **tail)
+void	tri_sort(t_stack **a)
 {
-	int	a;
-	int b;
-	int c;
+	int	w;
+	int x;
+	int y;
 
-	if (sorted(*tail)) //123
+	if (sorted(*a)) //123
 		return ;
-	a = (*tail) -> next -> nbr;
-	b = (*tail) -> next -> next -> nbr;
-	c = (*tail) -> nbr;
-	if (a < b && a < c && b > c) //1 3 2
-		rra(tail, 'a'), sa(tail, 'a');
-	else if (a > b && a < c) // 2 1 3
-		sa(tail, 'a');
-	else if (a < b && a > c) // 2 3 1
-		rra(tail, 'a');
-	else if (a > b && a > c && b < c) //3 1 2
-		ra(tail, 'a');
-	else if (a > b && a > c && b > c) // 3 2 1
-		sa(tail, 'a'), rra(tail, 'a');
+	w = (*a) -> next -> nbr;
+	x = (*a) -> next -> next -> nbr;
+	y = (*a) -> nbr;
+	if (w < x && w < y && x > y) //1 3 2
+		rra(a, 'a'), sa(a, 'a');
+	else if (w > x && w < y) // 2 1 3
+		sa(a, 'a');
+	else if (w < x && w > y) // 2 3 1
+		rra(a, 'a');
+	else if (w > x && w > y && x < y) //3 1 2
+		ra(a, 'a');
+	else if (w > x && w > y && x > y) // 3 2 1
+		sa(a, 'a'), rra(a, 'a');
 	else
-		ft_error();
-	if (sorted(*tail))
+		ft_putstr_fd("tri_sort failed", 2), ft_error();
+	if (sorted(*a))
 		return ;
 }
 
-void	quad_sort(struct s_stack **tail)
+void	quad_sort(t_stack **a, t_stack **b)
 {
-	struct s_stack *tail_b;
-	int		a;
-	int		b;
-	int		c;
-	int		d;
+	int		w;
+	int		x;
+	int		y;
+	int		z;
 
-	if (sorted(*tail))
+	if (sorted(*a))
 		return ;
-	tail_b = NULL;
-	a = (*tail)->next->nbr;
-	b = (*tail)->next->next->nbr;
-	c = (*tail)->prev->nbr;
-	d = (*tail)->nbr;
-	pb(tail, &tail_b);
-	tri_sort(tail);
-	pa(&tail_b, tail);
-	if (a < b && a < c && a < d) //if a is 1
+	w = (*a)->next->nbr;
+	x = (*a)->next->next->nbr;
+	y = (*a)->prev->nbr;
+	z = (*a)->nbr;
+	pb(a, b);
+	tri_sort(a);
+	pa(b, a);
+	if (w < x && w < y && w < z) //if w is 1
 		return ;
-	else if ((a < b && a < c && a > d) || (a < b && a > c && a < d) || (a > b && a < c && a < d))
-		sa(tail, 'a');
-	else if ((a > b && a > c && a < d) || (a > b && a < c && a > d) || (a < b && a > c && a > d))
-		rra(tail, 'a'), sa(tail, 'a'), ra(tail, 'a'), ra(tail, 'a');
-	else if (a > b && a > c && a > d)
-		ra(tail, 'a');
-	if (sorted(*tail))
+	else if ((w < x && w < y && w > z) || (w < x && w > y && w < z) || (w > x && w < y && w < z))
+		sa(a, 'a');
+	else if ((w > x && w > y && w < z) || (w > x && w < y && w > z) || (w < x && w > y && w > z))
+		rra(a, 'a'), sa(a, 'a'), ra(a, 'a'), ra(a, 'a');
+	else if (w > x && w > y && w > z)
+		ra(a, 'a');
+	if (sorted(*a))
 		return ;
 }
 
-void	quint_sort(struct s_stack **tail)
+void	quint_sort(t_stack **a, t_stack **b) //here should be stack b and stack a
 {
-	struct s_stack *b = NULL;
-	int				n;
-	int				median;
+	int	pushed;
+	int	pivot;
 
-	if (sorted(*tail))
+	if (sorted(*a))
 		return ;
-	n = 5;
-	median = n/2;
-	while (n > (median + 1)) //if odd number, has to be median + 1
+	pushed = 0;
+	pivot = find_median(*a, 5);
+	while (pushed != 2)
 	{
-		if ((*tail)->next->ei <= median) //can do some more optimisation here
-			pb(tail, &b), n--;
+		if ((*a)->next->ei < pivot)
+			pb(a, b), pushed++;
 		else
-			ra(tail, 'a');
+			ra(a, 'a');
 	}
-	tri_sort(tail);
-	if (sorted(b))
-		sa(&b, 'b');
-	while (n < 5)
-	{
-		if ((*tail)->next->ei - b->next->ei == 1)
-			pa(&b, tail), n++;
-		else
-			ra(tail, 'a');
-	}
-	if (sorted(*tail))
-		return ;
+	tri_sort(a);
+	if ((*b)->next->ei < (*b)->next->next->ei)
+		sa(b, 'b');
+	pa(b, a), pa(b, a);
+	if (sorted(*a))
+		return;
 	else
-		ft_putstr_fd("quint sort failed", 1);
+		ft_putstr_fd("quint sort failed", 2), free_list(a, stack_size(*a)), ft_error();
 	return ;
 }
 
-// void	sext_sort(struct s_stack **tail)
+// void	sext_sort(t_stack **tail)
 // {
-// 	struct s_stack *b = NULL;
+// 	t_stack *b = NULL;
 // 	int				n;
 // 	int				median;
 // 	if (sorted(*tail))
