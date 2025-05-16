@@ -40,6 +40,6 @@ int	main(int argc, char **argv)
 	//printf("new stack a:"), print(a);
 	if (b != NULL)
 		printf("new stack b:"), print(b);
-	free_list(&a, argn);
+	//free_list(&a, argn);
 	return(0);
 }
