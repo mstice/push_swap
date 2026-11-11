@@ -1,6 +1,9 @@
 # push_swap
 Grade achieved: 90% ✅
 
+## 🎯 Objective
+To minimise the number of operations made when sorting large datasets.
+
 ## ℹ️Description
 #### Concepts: Algorithms and Data Structures
 - A program to sort numbers with the least move complexity
